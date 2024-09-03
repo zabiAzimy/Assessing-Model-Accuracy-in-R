@@ -1,0 +1,27 @@
+{
+    "id": "BB139087",
+    "path": "~/BHT/Ml-1/model_accuracy/cross_validation_programming.R",
+    "project_path": "cross_validation_programming.R",
+    "type": "r_source",
+    "hash": "3679683572",
+    "contents": "",
+    "dirty": false,
+    "created": 1725310236585.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "87,17",
+        "scrollLine": "74"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1725367178,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1725367178052,
+    "read_only": false,
+    "read_only_alternatives": []
+}

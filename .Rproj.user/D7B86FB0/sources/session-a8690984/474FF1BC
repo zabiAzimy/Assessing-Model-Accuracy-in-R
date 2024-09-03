@@ -1,0 +1,27 @@
+{
+    "id": "474FF1BC",
+    "path": "~/BHT/Ml-1/model_accuracy/k_fold_cv.R",
+    "project_path": "k_fold_cv.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1725302951933.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "91,0",
+        "scrollLine": "37"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1725303518,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1725309412866,
+    "read_only": false,
+    "read_only_alternatives": []
+}

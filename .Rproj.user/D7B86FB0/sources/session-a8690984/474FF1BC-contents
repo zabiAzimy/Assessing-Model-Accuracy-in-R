@@ -1,0 +1,98 @@
+# K-fold cross validation
+
+# we are using cv.glm() function to perform k-fold CV
+
+# set the seed
+set.seed(17)
+
+# create a vector to hold the errors
+cv.error.10 <- rep(0, 10)
+
+for(i in 1:10) {
+  glm.fit <- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.error.10[i] <- cv.glm(Auto, glm.fit, K = 10)$delta[1]
+}
+cv.error.10
+
+
+
+# load the boot libraray
+library(boot)
+?cv.glm
+
+# define the minimal model 
+glm_01 <- glm(mpg ~ horsepower + I(horsepower ^ 2), data = Auto)
+
+# compute the cross validation error
+cv_error <- cv.glm(data = Auto, glm_01)
+cv_error$delta
+
+# we are going to add each other variable in turn and compute the CV error
+cv_error <- rep(0, 6)
+
+# storing the first cv error from the first model
+cv_error[1] <- cv.glm(data = Auto, glm_01)$delta[1]
+
+# fit the second model, adding the year variable also
+glm_fit_02 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + year, data = Auto)
+# compute the cv error for the second model 
+cv_error[2] <- cv.glm(data = Auto, glm_fit_02)$delta[1]
+
+
+# Now We are going to fit many models using other variables instead of year
+glm_fit_03 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + weight, data = Auto)
+cv_error[3] <- cv.glm(data = Auto, glm_fit_03)$delta[1]
+
+glm_fit_04 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + acceleration, data = Auto)
+cv_error[4] <- cv.glm(data = Auto, glm_fit_04)$delta[1]
+
+glm_fit_05 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + displacement, data = Auto)
+cv_error[5] <- cv.glm(data = Auto, glm_fit_05)$delta[1]
+
+glm_fit_06 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + cylinders, data = Auto)
+cv_error[6] <- cv.glm(data = Auto, glm_fit_06)$delta[1]
+
+cv_error
+# plot different cv-errors corresponding to the each of the models above
+plot(cv_error, type = "b", col = "darkgreen", lwd = 2)
+
+
+cv_error_2 <- rep(0, 5)
+
+# after finding out the model that gives the lowest LOOCV MSE
+# define the current model plus this variable -- This variable seems to be year
+ideal_model <- glm(mpg ~ horsepower + I(horsepower ^ 2) + year, data = Auto)
+cv_error_2[1] <- cv.glm(data = Auto, ideal_model)$delta[1]
+
+# Adding other variables to the above model to check whether the LOOCV MSE changes 
+ideal_model_01 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + year + weight, data = Auto)
+cv_error_2[2] <- cv.glm(data = Auto, ideal_model_01)$delta[1]
+
+ideal_model_02 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + year + weight + acceleration, data = Auto)
+cv_error_2[3] <- cv.glm(data = Auto, ideal_model_02)$delta[1]
+
+ideal_model_03 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + year + weight + acceleration + displacement, data = Auto)
+cv_error_2[4] <- cv.glm(data = Auto, ideal_model_03)$delta[1]
+
+ideal_model_04 <- glm(mpg ~ horsepower + I(horsepower ^ 2) + year + weight + acceleration + displacement + cylinders, data = Auto)
+cv_error_2[5] <- cv.glm(data = Auto, ideal_model_04)$delta[1]
+
+# plot the LOOCV MSEs to see whether it is decreasing
+plot(cv_error_2, type = "b", col = "blue", lwd = 2)
+cv_error_2
+
+
+# output the summary for the chosen best model
+summary(ideal_model_04)
+
+
+
+
+
+
+
+
+
+
+
+
